@@ -1,0 +1,36 @@
+name: 'Deploy Helm Chart Repo'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push-to-cf-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Enter repo directory
+        run: cd ~/work/helm-charts/helm-charts
+      - name: Helm Installation
+        uses: azure/setup-helm@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Package Helm charts
+        run: |
+          for dir in charts/*; do
+            if [ -d "$dir" ]; then
+              helm package $dir -d build/
+            fi
+          done
+      - name: Update Helm repo index
+        run: helm repo index build --url https://helm-charts.route1337.com
+      - name: Deploy the site
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build
+          publish_branch: CF_Pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
