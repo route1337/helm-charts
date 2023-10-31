@@ -1,0 +1,22 @@
+namespace: cloudflared
+clusterName: "1337-k8s"
+
+secretsBackend: secretsManager
+
+ingress:
+  enabled: true
+  replicas: 4
+  metricsPort: 2000
+  consoleTokenSecret: k8s/1337-k8s/cloudflare-ingress
+
+warp:
+  enabled: true
+  replicas: 2
+  metricsPort: 2000
+  consoleTokenSecret: k8s/1337-k8s/cloudflare-warp
+
+image:
+  repository: cloudflare/cloudflared
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""

@@ -1,0 +1,2 @@
+1. This chart relies on external-secrets however it currently supports a version of external-secrets that
+isn't using the SecretStore resource yet. This will be updated in a future version.
