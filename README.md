@@ -2,10 +2,10 @@ Public Helm Charts
 ==================
 This repo contains the various Helm charts used by Route 1337 LLC that we have made publicly available for the Devops community.
 
-Using our charts
+<!--Using our charts
 ----------------
 Our charts are hosted via Cloudflare Pages at [https://helm-charts.route1337.com](https://helm-charts.route1337.com).  
-We have a basic index page listing the name, description and latest version of the charts.
+We have a basic index page listing the name, description and latest version of the charts.-->
 
 A note on dependencies
 ----------------------
