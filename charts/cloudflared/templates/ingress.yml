@@ -1,0 +1,55 @@
+{{- if .Values.ingress.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.clusterName }}-ingress
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: cloudflared-ingress
+  replicas: {{ .Values.ingressReplicaCount }}
+  template:
+    metadata:
+      labels:
+        app: cloudflared-ingress
+    spec:
+      containers:
+      - name: cloudflared-ingress
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        args:
+        - tunnel
+        - --metrics
+        - "0.0.0.0:{{ .Values.ingress.metricsPort }}"
+        - --no-autoupdate
+        - run
+        - --token=$(CF_TOKEN)
+        env:
+          - name: CF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.clusterName }}-ingress
+                key: console_token
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: {{ .Values.ingress.metricsPort }}
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: {{ .Values.ingress.metricsPort }}
+            scheme: HTTP
+        startupProbe:
+          httpGet:
+            path: /ready
+            port: {{ .Values.ingress.metricsPort }}
+            scheme: HTTP
+          failureThreshold: 60
+          periodSeconds: 10
+{{- end }}

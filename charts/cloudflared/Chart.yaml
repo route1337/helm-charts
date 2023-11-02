@@ -1,0 +1,18 @@
+apiVersion: v2
+name: cloudflared
+description: Deploy a cloudflared tunnel from a Zero Trust console token
+type: application
+version: 0.1.0
+appVersion: "latest" # We always prefer running the latest tunnel
+keywords:
+  - Zero Trust
+  - Cloudflare
+  - Security
+  - Ingress
+  - Tunnel
+  - VPN
+home: https://github.com/cloudflare/cloudflared
+maintainers:
+  - name: Route 1337 LLC
+    url: https://www.route1337.com
+deprecated: false
