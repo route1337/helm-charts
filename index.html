@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route 1337 LLC Public Helm Charts</title>
+    <script src="js-yaml.min.js"></script>
+</head>
+<body>
+<h1>Route 1337 LLC's Public Helm Charts</h1>
+This is a list of our various Helm charts used by us internally. We have made them publicly available for the Devops community to enjoy.
+<br /><br />
+<iframe src="https://github.com/sponsors/route1337/button" title="Sponsor route1337" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+<br /><br />
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Latest Version</th>
+    </tr>
+    </thead>
+    <tbody id="helmData">
+    <!-- Rows will be populated here by JavaScript -->
+    </tbody>
+</table>
+<script>
+    // Fetch the index.yaml file
+    fetch('index.yaml')
+        .then(response => response.text())
+        .then(data => {
+            const parsedYaml = jsyaml.load(data);
+            const tbody = document.getElementById('helmData');
+
+            for (let chartName in parsedYaml.entries) {
+                const chart = parsedYaml.entries[chartName][0];  // Assuming you want the latest version
+
+                const row = document.createElement('tr');
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = chartName;
+                row.appendChild(nameCell);
+
+                const descriptionCell = document.createElement('td');
+                descriptionCell.textContent = chart.description;
+                row.appendChild(descriptionCell);
+
+                const versionCell = document.createElement('td');
+                versionCell.textContent = chart.version;
+                row.appendChild(versionCell);
+
+                tbody.appendChild(row);
+            }
+        });
+</script>
+</body>
+</html>

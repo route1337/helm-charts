@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  cloudflared:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2023-11-03T23:42:34.291389895Z"
+    description: Deploy a cloudflared tunnel from a Zero Trust console token
+    digest: 9aa3b9020a0759473122ef56d45409ff48610941de94690d4e374e2c19c8b796
+    home: https://github.com/cloudflare/cloudflared
+    keywords:
+    - Zero Trust
+    - Cloudflare
+    - Security
+    - Ingress
+    - Tunnel
+    - VPN
+    maintainers:
+    - name: Route 1337 LLC
+      url: https://www.route1337.com
+    name: cloudflared
+    type: application
+    urls:
+    - https://helm-charts.route1337.com/cloudflared-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-11-03T23:42:34.290553134Z"
