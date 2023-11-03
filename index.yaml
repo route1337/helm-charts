@@ -3,9 +3,9 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: latest
-    created: "2023-11-03T23:42:34.291389895Z"
+    created: "2023-11-03T23:44:18.341636979Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
-    digest: 9aa3b9020a0759473122ef56d45409ff48610941de94690d4e374e2c19c8b796
+    digest: 04c7c75f069b1d62b77dc0cc1225b497867f2660d5e9fbb40f07fba529a701d3
     home: https://github.com/cloudflare/cloudflared
     keywords:
     - Zero Trust
@@ -22,4 +22,4 @@ entries:
     urls:
     - https://helm-charts.route1337.com/cloudflared-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-03T23:42:34.290553134Z"
+generated: "2023-11-03T23:44:18.341242763Z"
