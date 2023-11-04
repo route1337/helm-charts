@@ -25,7 +25,7 @@ spec:
       containers:
         - name: {{ .Values.debugging.serviceName }}
           image: "{{ .Values.debugging.image.repository }}:{{ .Values.debugging.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.debugging.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.debugging.port }}
