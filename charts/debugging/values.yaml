@@ -1,0 +1,11 @@
+namespace: debugging
+replicaCount: 2
+
+debugging:
+  serviceName: debugging
+  port: 80
+  image:
+    repository: ghcr.io/ahrenstein/docker-debugging
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
