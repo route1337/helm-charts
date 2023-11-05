@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Enter repo directory
         run: cd ~/work/helm-charts/helm-charts
       - name: Helm Installation
@@ -24,13 +24,36 @@ jobs:
               helm package $dir -d build/
             fi
           done
-      - name: Update Helm repo index
-        run: helm repo index build --url https://helm-charts.route1337.com
       - name: Deploy the site
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build
           publish_branch: gh_pages
+          keep_files: true
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+  re-index:
+    runs-on: ubuntu-latest
+    needs: [ push-to-gh-pages ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: 'gh_pages'
+      - name: Enter repo directory
+        run: cd ~/work/helm-charts/helm-charts
+      - name: Helm Installation
+        uses: azure/setup-helm@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update Helm repo index
+        run: helm repo index ./ --url https://helm-charts.route1337.com
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[GitHub] Updating Helm index"
+          commit_user_name: GitHub Actions
+          commit_user_email: noreply@github.com
+          commit_author: GitHub Actions <noreply@github.com>
+          branch: gh_pages
