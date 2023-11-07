@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debugging
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.debugging.serviceName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.debugging.serviceName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.debugging.serviceName }}
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.debugging.serviceName }}
+      containers:
+        - name: {{ .Values.debugging.serviceName }}
+          image: "{{ .Values.debugging.image.repository }}:{{ .Values.debugging.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.debugging.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.debugging.port }}
