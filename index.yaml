@@ -3,9 +3,9 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: latest
-    created: "2023-11-03T23:44:18.341636979Z"
+    created: "2023-11-07T00:53:14.801423242Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
-    digest: 04c7c75f069b1d62b77dc0cc1225b497867f2660d5e9fbb40f07fba529a701d3
+    digest: a2701a36781a55611b672812a133fb5e3926e9ece2a0973cb477e4760a017a12
     home: https://github.com/cloudflare/cloudflared
     keywords:
     - Zero Trust
@@ -22,4 +22,22 @@ entries:
     urls:
     - https://helm-charts.route1337.com/cloudflared-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-03T23:44:18.341242763Z"
+  debugging:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2023-11-07T00:53:14.801630537Z"
+    description: Deploy the Matthew Ahrenstein's standard debugging container along
+      with the debugging namespace
+    digest: bb8fe8c2873832b202f9ae4d9a46ccb6bc8a90871d7debaee759c7ebb38df80e
+    home: https://github.com/ahrenstein/docker-debugging
+    keywords:
+    - Debugging
+    maintainers:
+    - name: Route 1337 LLC
+      url: https://www.route1337.com
+    name: debugging
+    type: application
+    urls:
+    - https://helm-charts.route1337.com/debugging-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-11-07T00:53:14.80103841Z"
