@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared-ingress
-  replicas: {{ .Values.ingressReplicaCount }}
+  replicas: {{ .Values.ingress.replicas }}
   template:
     metadata:
       labels:

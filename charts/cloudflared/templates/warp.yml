@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared-warp
-  replicas: {{ .Values.warpReplicaCount }}
+  replicas: {{ .Values.warp.replicas }}
   template:
     metadata:
       labels:
