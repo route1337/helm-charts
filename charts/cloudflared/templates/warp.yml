@@ -8,12 +8,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: cloudflared-warp
+      app: {{ .Values.clusterName }}-cloudflared-warp
   replicas: {{ .Values.warp.replicas }}
   template:
     metadata:
       labels:
-        app: {{ .Values.clusterName }}-warp
+        app: {{ .Values.clusterName }}-cloudflared-warp
     spec:
 {{- if .Values.warp.spreadPods }}
       topologySpreadConstraints:
@@ -22,10 +22,10 @@ spec:
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:
-              app: {{ .Values.clusterName }}-warp
+              app: {{ .Values.clusterName }}-cloudflared-warp
 {{- end }}
       containers:
-      - name: cloudflared-warp
+      - name: {{ .Values.clusterName }}-cloudflared-warp
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: Always
         args:
