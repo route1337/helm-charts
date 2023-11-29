@@ -8,16 +8,18 @@ ingress:
   replicas: 4
   metricsPort: 2000
   consoleTokenSecret:
-    secretName: k8s/1337-k8s/cloudflare-ingress
+    secretName: 1337-k8s-cloudflare-ingress
     secretStore: 1password-prod
+    secretStoreKind: ClusterSecretStore
 
 warp:
   enabled: true
   replicas: 2
   metricsPort: 2000
   consoleTokenSecret:
-    secretName: k8s/1337-k8s/cloudflare-warp
+    secretName: 1337-k8s-cloudflare-warp
     secretStore: 1password-prod
+    secretStoreKind: ClusterSecretStore
 
 image:
   repository: cloudflare/cloudflared
