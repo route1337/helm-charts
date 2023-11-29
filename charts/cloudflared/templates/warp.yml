@@ -13,8 +13,17 @@ spec:
   template:
     metadata:
       labels:
-        app: cloudflared-warp
+        app: {{ .Values.clusterName }}-warp
     spec:
+{{- if .Values.warp.spreadPods }}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.clusterName }}-warp
+{{- end }}
       containers:
       - name: cloudflared-warp
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

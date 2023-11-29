@@ -13,8 +13,17 @@ spec:
   template:
     metadata:
       labels:
-        app: cloudflared-ingress
+        app: {{ .Values.clusterName }}-ingress
     spec:
+{{- if .Values.ingress.spreadPods }}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.clusterName }}-ingress
+{{- end }}
       containers:
       - name: cloudflared-ingress
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
