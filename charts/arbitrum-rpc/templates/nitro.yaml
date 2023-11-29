@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.rpcService.name }}
+  namespace: {{ .Values.namespace}}
+spec:
+  serviceName: {{ .Values.rpcService.name }}
+  replicas: {{ .Values.rpcService.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.rpcService.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.rpcService.name }}
+    spec:
+      initContainers:
+        - name: volume-permissions-fix
+          image: busybox
+          command: ['/bin/sh', '-c']
+          args:
+            - |
+              #!/bin/sh
+              mkdir -p /home/user/.arbitrum/tmp &&
+              chmod -Rf 777 /home/user/.arbitrum
+          volumeMounts:
+            - name: arbitrum-data
+              mountPath: /home/user/.arbitrum
+      containers:
+        - name: {{ .Values.rpcService.name }}
+          image: "{{ .Values.rpcService.image.repository }}:v{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.rpcService.image.pullPolicy }}
+          args:
+            - "--init.url={{ .Values.rpcService.init.url }}"
+            - "--init.download-path={{ .Values.rpcService.init.downloadPath }}"
+            - "--parent-chain.connection.url={{ .Values.rpcService.gethRpcUrl }}"
+            - "--chain.id={{ .Values.rpcService.chainId }}"
+            - "--http.api=net,web3,eth,debug"
+            - "--http.corsdomain=*"
+            - "--http.addr=0.0.0.0"
+            - "--http.vhosts=*"
+            - "--ws.port=8548"
+            - "--ws.addr=0.0.0.0"
+            - "--ws.origins=*"
+          ports:
+            - containerPort: 8547
+              name: rpc
+            - containerPort: 9642
+              name: sequencer
+            - containerPort: 8548
+              name: ws-rpc
+          volumeMounts:
+            - name: arbitrum-data
+              mountPath: /home/user/.arbitrum
+          resources:
+            limits:
+              memory: {{ .Values.rpcService.resources.limits.memory | quote }}
+            requests:
+              memory: {{ .Values.rpcService.resources.requests.memory | quote }}
+  volumeClaimTemplates:
+    - metadata:
+        name: arbitrum-data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        storageClassName: {{ .Values.rpcService.volume.storageClass }}
+        resources:
+          requests:
+            storage: {{ .Values.rpcService.volume.capacity }}
