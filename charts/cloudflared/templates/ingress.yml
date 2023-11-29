@@ -8,15 +8,24 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: cloudflared-ingress
+      app: {{ .Values.clusterName }}-cloudflared-ingress
   replicas: {{ .Values.ingress.replicas }}
   template:
     metadata:
       labels:
-        app: cloudflared-ingress
+        app: {{ .Values.clusterName }}-cloudflared-ingress
     spec:
+{{- if .Values.ingress.spreadPods }}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.clusterName }}-cloudflared-ingress
+{{- end }}
       containers:
-      - name: cloudflared-ingress
+      - name: {{ .Values.clusterName }}-cloudflared-ingress
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         args:
         - tunnel
