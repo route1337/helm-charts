@@ -1,0 +1,33 @@
+{{- if .Values.diagnostic }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: "{{ .Values.rpcService.name }}-diag"
+  namespace: {{ .Values.namespace }}
+spec:
+  serviceName: "{{ .Values.rpcService.name }}-diag"
+  replicas: {{ .Values.rpcService.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ .Values.rpcService.name }}-diag"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.rpcService.name }}-diag"
+    spec:
+      containers:
+        - name: "{{ .Values.rpcService.name }}-diag"
+          image: ghcr.io/ahrenstein/docker-debugging:latest
+          imagePullPolicy: {{ .Values.rpcService.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name:  {{ .Values.sharedEfsVolume.name }}
+              mountPath: /efs
+      volumes:
+        - name: {{ .Values.sharedEfsVolume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.sharedEfsVolume.name }}
+{{- end }}
