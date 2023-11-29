@@ -3,7 +3,28 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: latest
-    created: "2023-11-09T02:31:15.480690344Z"
+    created: "2023-11-29T00:24:31.125116832Z"
+    description: Deploy a cloudflared tunnel from a Zero Trust console token
+    digest: fcb0683a38789965b209d7d57b82e4b41edb61c0bfd320b5e40d5fde1b6d1b5f
+    home: https://github.com/cloudflare/cloudflared
+    keywords:
+    - Zero Trust
+    - Cloudflare
+    - Security
+    - Ingress
+    - Tunnel
+    - VPN
+    maintainers:
+    - name: Route 1337 LLC
+      url: https://www.route1337.com
+    name: cloudflared
+    type: application
+    urls:
+    - https://helm-charts.route1337.com/cloudflared-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: latest
+    created: "2023-11-29T00:24:31.124860904Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 067091d9d4cd508580c28354cd0cc92a205f27849dc369b5ade06911c419797f
     home: https://github.com/cloudflare/cloudflared
@@ -24,7 +45,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2023-11-09T02:31:15.480442271Z"
+    created: "2023-11-29T00:24:31.1245963Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: a2701a36781a55611b672812a133fb5e3926e9ece2a0973cb477e4760a017a12
     home: https://github.com/cloudflare/cloudflared
@@ -46,10 +67,10 @@ entries:
   debugging:
   - apiVersion: v2
     appVersion: latest
-    created: "2023-11-09T02:31:15.48106379Z"
+    created: "2023-11-29T00:24:31.125319871Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
-    digest: 4ee46d919f0928202ce03c8f3bb34fbac3b236cbe60359a1149cdff52a9eee06
+    digest: ae920bdd1f8079147dbee8b7f08d7b15a98afd2f6e4fe53a4d3d7c6960241c51
     home: https://github.com/ahrenstein/docker-debugging
     keywords:
     - Debugging
@@ -61,4 +82,4 @@ entries:
     urls:
     - https://helm-charts.route1337.com/debugging-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-09T02:31:15.480036895Z"
+generated: "2023-11-29T00:24:31.124201603Z"
