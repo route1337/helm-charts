@@ -14,6 +14,9 @@ spec:
     metadata:
       labels:
         app: {{ .Values.clusterName }}-cloudflared-warp
+      annotations:
+        prometheus.io/port: {{ .Values.warp.metricsPort | quote }}
+        prometheus.io/scrape: 'true'
     spec:
 {{- if .Values.warp.spreadPods }}
       topologySpreadConstraints:
