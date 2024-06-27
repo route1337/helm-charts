@@ -2,7 +2,7 @@ apiVersion: v2
 name: debugging
 description: Deploy the Matthew Ahrenstein's standard debugging container along with the debugging namespace
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "latest" # We always prefer running the latest debugging container
 keywords:
   - Debugging
