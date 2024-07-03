@@ -1,2 +1,20 @@
 User-Agent: ia_archiver
 Disallow: /
+
+### AI ###
+# ChatGPT
+User-agent: GPTBot
+Disallow: /
+# Google AI (not standard search)
+User-agent: Google-Extended
+Disallow: /
+# Apple AI
+User-agent: Applebot
+Disallow: /
+# Common Crawl (public dataset)
+User-agent: CCBot
+Disallow: /
+# Anthropic's Claude bot
+User-agent: ClaudeBot
+Disallow: /
+### End AI ###
