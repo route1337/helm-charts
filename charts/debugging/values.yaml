@@ -8,3 +8,8 @@ debugging:
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+
+ingress:
+  enabled: false
+  domain: debugging.contoso.com
+  certManager: true
