@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: debugging
+  name: {{ .Values.debugging.serviceName }}
   namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.debugging.serviceName }}

@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: debugging
+  name: {{ .Values.debugging.serviceName }}
   namespace: {{ .Release.Namespace }}
   {{- if .Values.ingress.certManager }}
   annotations:
@@ -16,7 +16,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingress.domain }}
-      secretName: debugging-certificate
+      secretName: {{ .Values.debugging.serviceName }}-certificate
   {{- end }}
   rules:
     - host: {{ .Values.ingress.domain }}
@@ -26,7 +26,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: debugging
+                name: {{ .Values.debugging.serviceName }}
                 port:
                   number: 80
 {{- end }}
