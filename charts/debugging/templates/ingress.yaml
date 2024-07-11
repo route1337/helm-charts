@@ -16,7 +16,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingress.domain }}
-      secretName: debugging-site
+      secretName: debugging-certificate
   {{- end }}
   rules:
     - host: {{ .Values.ingress.domain }}
