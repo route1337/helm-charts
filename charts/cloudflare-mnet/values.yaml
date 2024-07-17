@@ -1,0 +1,24 @@
+replicaCount: 2
+
+nfs:
+  storageCapacity: 1Gi
+  accessMode: ReadWriteMany
+  nfsPath: "/volume1/NFSServer"
+  nfsServer: 10.1.2.3
+
+loadBalancer:
+  annotations: {
+    metallb.universe.tf/loadBalancerIPs: 10.4.5.6
+  }
+
+managedNetwork:
+  serviceName: cloudflare-mnet
+  networkName: "Some Network Name"
+  port: 8443
+  volume:
+    path: "cert"
+  image:
+    repository: ghcr.io/route1337/cloudflare-mnet-server
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""

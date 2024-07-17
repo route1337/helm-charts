@@ -1,0 +1,18 @@
+apiVersion: v2
+name: cloudflare-mnet
+description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
+type: application
+version: 0.1.0
+appVersion: "latest" # We always prefer running the latest debugging container
+keywords:
+  - Zero Trust
+  - Cloudflare
+  - Security
+  - Ingress
+  - Tunnel
+  - VPN
+home: https://github.com/route1337/docker-cf-mnet-server
+maintainers:
+  - name: Route 1337 LLC
+    url: https://www.route1337.com
+deprecated: false

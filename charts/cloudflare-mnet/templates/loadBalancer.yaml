@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.managedNetwork.serviceName }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+{{ toYaml .Values.loadBalancer.annotations | indent 4 }}
+  labels:
+    app: {{ .Values.managedNetwork.serviceName }}
+spec:
+  selector:
+    app: {{ .Values.managedNetwork.serviceName }}
+  ports:
+    - name: https
+      port: {{ .Values.managedNetwork.port }}
+  type: LoadBalancer
