@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.managedNetwork.serviceName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.managedNetwork.serviceName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.managedNetwork.serviceName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.managedNetwork.serviceName }}
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.managedNetwork.serviceName }}
+      containers:
+        - name: {{ .Values.managedNetwork.serviceName }}
+          image: "{{ .Values.managedNetwork.image.repository }}:{{ .Values.managedNetwork.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.managedNetwork.image.pullPolicy }}
+          env:
+            - name: NETWORK_NAME
+              value: {{ .Values.managedNetwork.networkName | quote }}
+          volumeMounts:
+            - mountPath: "/cert"
+              name: "{{ .Values.managedNetwork.serviceName }}-cert"
+              subPath: {{ .Values.managedNetwork.volume.path | quote}}
+          ports:
+            - name: https
+              containerPort: {{ .Values.managedNetwork.port }}
+      volumes:
+        - name: "{{ .Values.managedNetwork.serviceName }}-cert"
+          persistentVolumeClaim:
+            claimName: {{ .Values.managedNetwork.serviceName }}-nfs-pvc
