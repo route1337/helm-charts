@@ -3,7 +3,28 @@ entries:
   cloudflare-mnet:
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.412796881Z"
+    created: "2024-07-18T01:13:48.754503385Z"
+    description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
+    digest: 57d983c386febc892cea4c4cd1ee68ad081b0957186260981f96696f2d9d5b2a
+    home: https://github.com/route1337/docker-cf-mnet-server
+    keywords:
+    - Zero Trust
+    - Cloudflare
+    - Security
+    - Ingress
+    - Tunnel
+    - VPN
+    maintainers:
+    - name: Route 1337 LLC
+      url: https://www.route1337.com
+    name: cloudflare-mnet
+    type: application
+    urls:
+    - https://helm-charts.route1337.com/cloudflare-mnet-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-07-18T01:13:48.754272216Z"
     description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
     digest: b4a6f0375d134d5e80a0e9768461dff22a22c044c88dd8d9f7f89ab949ea4502
     home: https://github.com/route1337/docker-cf-mnet-server
@@ -25,9 +46,9 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.415047277Z"
+    created: "2024-07-18T01:13:48.756736911Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
-    digest: ac151d0e30eab7cc05c7c9c0f254616d395fab46c6c4921417856527b50e9e94
+    digest: 190772f75a2b23219a71816fc2b3a743fed6cf2d09e79555ca704b95fad5e629
     home: https://github.com/cloudflare/cloudflared
     keywords:
     - Zero Trust
@@ -46,7 +67,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.414797552Z"
+    created: "2024-07-18T01:13:48.756470707Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 51f72a988ba6432aed12d5063f4c7c6d291a70fea8a573e0334c62c68705d3bd
     home: https://github.com/cloudflare/cloudflared
@@ -67,7 +88,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.414517389Z"
+    created: "2024-07-18T01:13:48.755914605Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 9406d888b29dea479e6200dc45c5046f8169d19e55ce8287c430a0c63569558c
     home: https://github.com/cloudflare/cloudflared
@@ -88,7 +109,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.414156055Z"
+    created: "2024-07-18T01:13:48.755189368Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: fcb0683a38789965b209d7d57b82e4b41edb61c0bfd320b5e40d5fde1b6d1b5f
     home: https://github.com/cloudflare/cloudflared
@@ -109,7 +130,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.413585341Z"
+    created: "2024-07-18T01:13:48.754959912Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 067091d9d4cd508580c28354cd0cc92a205f27849dc369b5ade06911c419797f
     home: https://github.com/cloudflare/cloudflared
@@ -130,7 +151,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.413036077Z"
+    created: "2024-07-18T01:13:48.754718925Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: a2701a36781a55611b672812a133fb5e3926e9ece2a0973cb477e4760a017a12
     home: https://github.com/cloudflare/cloudflared
@@ -152,10 +173,10 @@ entries:
   debugging:
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.415782047Z"
+    created: "2024-07-18T01:13:48.757498595Z"
     description: Deploy Matthew Ahrenstein's standard debugging container along with
       the debugging namespace
-    digest: 4a49cea6b3fd0ea67fbf5a4d1596c117cf1ddb30a58f2fc313efd5e48a330b67
+    digest: c7ff8f9abb5dda5d68cd44955148eeec1b8b091d239b81b2de220739265582bf
     home: https://github.com/ahrenstein/docker-debugging
     keywords:
     - Debugging
@@ -169,7 +190,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.415603915Z"
+    created: "2024-07-18T01:13:48.757316196Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: 185ea05a44433dd346906cc05f2ed46707d0bf44631c8380ca8a0b8d810bfca3
@@ -186,7 +207,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.415411547Z"
+    created: "2024-07-18T01:13:48.757101437Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: d9b4c2c5467e25b55468ce8fc4d98557e5c8022b905af6cc5af764897b4f6ef1
@@ -203,7 +224,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2024-07-17T04:15:39.415241379Z"
+    created: "2024-07-18T01:13:48.756931412Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: 068c1191bd2c9e48fdd13d999d4140e7960f834ba4e5fc4fb34e0b0f8791b95c
@@ -218,4 +239,4 @@ entries:
     urls:
     - https://helm-charts.route1337.com/debugging-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-17T04:15:39.412378912Z"
+generated: "2024-07-18T01:13:48.753688202Z"
