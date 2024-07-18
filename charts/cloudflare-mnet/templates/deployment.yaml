@@ -30,13 +30,18 @@ spec:
             - name: NETWORK_NAME
               value: {{ .Values.managedNetwork.networkName | quote }}
           volumeMounts:
-            - mountPath: "/cert"
-              name: "{{ .Values.managedNetwork.serviceName }}-cert"
-              subPath: {{ .Values.managedNetwork.volume.path | quote}}
+            - name: "{{ .Values.managedNetwork.serviceName }}-cert"
+              mountPath: "/cert"
+              readOnly: true
           ports:
             - name: https
               containerPort: {{ .Values.managedNetwork.port }}
       volumes:
         - name: "{{ .Values.managedNetwork.serviceName }}-cert"
-          persistentVolumeClaim:
-            claimName: {{ .Values.managedNetwork.serviceName }}-nfs-pvc
+          secret:
+            secretName: {{ .Values.managedNetwork.serviceName }}-cert
+            items:
+              - key: cert
+                path: server.crt
+              - key: key
+                path: server.key
