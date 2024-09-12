@@ -45,13 +45,13 @@ spec:
               secretKeyRef:
                 name: {{ .Values.warp.consoleTokenSecret.manuallyCreatedSecret }}
                 key: console_token
-{{ else }}
+{{- else }}
           - name: CF_TOKEN
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.clusterName }}-warp
                 key: console_token
-{{ end }}
+{{- end }}
         livenessProbe:
           httpGet:
             path: /ready
