@@ -38,11 +38,19 @@ spec:
         - run
         - --token=$(CF_TOKEN)
         env:
+{{- if .Values.ingress.consoleTokenSecret.manuallyCreatedSecret }}
+          - name: CF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.ingress.consoleTokenSecret.manuallyCreatedSecret }}
+                key: console_token
+{{ else }}
           - name: CF_TOKEN
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.clusterName }}-ingress
                 key: console_token
+{{ end }}
         livenessProbe:
           httpGet:
             path: /ready
