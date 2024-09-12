@@ -39,11 +39,19 @@ spec:
         - run
         - --token=$(CF_TOKEN)
         env:
+{{- if .Values.warp.consoleTokenSecret.manuallyCreatedSecret }}
+          - name: CF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.warp.consoleTokenSecret.manuallyCreatedSecret }}
+                key: console_token
+{{- else }}
           - name: CF_TOKEN
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.clusterName }}-warp
                 key: console_token
+{{- end }}
         livenessProbe:
           httpGet:
             path: /ready
