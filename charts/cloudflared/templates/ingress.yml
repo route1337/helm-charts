@@ -30,6 +30,7 @@ spec:
       containers:
       - name: {{ .Values.clusterName }}-cloudflared-ingress
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: Always
         args:
         - tunnel
         - --metrics
