@@ -3,9 +3,9 @@ entries:
   cloudflare-mnet:
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.98348395Z"
+    created: "2024-10-22T03:30:11.159451409Z"
     description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
-    digest: 2f339d9d000ed8b1fa0ec73fee7a0218149618e02d62ea57c8cb550a4c6ab664
+    digest: 683aa20f20055a5c8704a59fbd85412f7b99b57a7316fbd53cbe9c59b7f02794
     home: https://github.com/route1337/docker-cf-mnet-server
     keywords:
     - Zero Trust
@@ -24,7 +24,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.983248457Z"
+    created: "2024-10-22T03:30:11.159218714Z"
     description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
     digest: b4a6f0375d134d5e80a0e9768461dff22a22c044c88dd8d9f7f89ab949ea4502
     home: https://github.com/route1337/docker-cf-mnet-server
@@ -46,7 +46,28 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.985179335Z"
+    created: "2024-10-22T03:30:11.161368699Z"
+    description: Deploy a cloudflared tunnel from a Zero Trust console token
+    digest: 368424b45aab539bfab2856e1fac453b4344e265a47e85d823140c00b597839e
+    home: https://github.com/cloudflare/cloudflared
+    keywords:
+    - Zero Trust
+    - Cloudflare
+    - Security
+    - Ingress
+    - Tunnel
+    - VPN
+    maintainers:
+    - name: Route 1337 LLC
+      url: https://www.route1337.com
+    name: cloudflared
+    type: application
+    urls:
+    - https://helm-charts.route1337.com/cloudflared-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-10-22T03:30:11.161134823Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: c99b968f0bee44993479d8e96f475faba2545f9592d5be77948f7cbf64bde353
     home: https://github.com/cloudflare/cloudflared
@@ -67,7 +88,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.984914928Z"
+    created: "2024-10-22T03:30:11.160909672Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: c18dfe7cc27ab07637bc68882f097d614c84166d8ce9f57f41195385601c8bac
     home: https://github.com/cloudflare/cloudflared
@@ -88,7 +109,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.984697099Z"
+    created: "2024-10-22T03:30:11.160679803Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 51f72a988ba6432aed12d5063f4c7c6d291a70fea8a573e0334c62c68705d3bd
     home: https://github.com/cloudflare/cloudflared
@@ -109,7 +130,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.984469612Z"
+    created: "2024-10-22T03:30:11.160449352Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 9406d888b29dea479e6200dc45c5046f8169d19e55ce8287c430a0c63569558c
     home: https://github.com/cloudflare/cloudflared
@@ -130,7 +151,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.984210525Z"
+    created: "2024-10-22T03:30:11.160203323Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: fcb0683a38789965b209d7d57b82e4b41edb61c0bfd320b5e40d5fde1b6d1b5f
     home: https://github.com/cloudflare/cloudflared
@@ -151,7 +172,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.983975033Z"
+    created: "2024-10-22T03:30:11.159950842Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 067091d9d4cd508580c28354cd0cc92a205f27849dc369b5ade06911c419797f
     home: https://github.com/cloudflare/cloudflared
@@ -172,7 +193,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.98373411Z"
+    created: "2024-10-22T03:30:11.159705193Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: a2701a36781a55611b672812a133fb5e3926e9ece2a0973cb477e4760a017a12
     home: https://github.com/cloudflare/cloudflared
@@ -194,10 +215,10 @@ entries:
   debugging:
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.985890191Z"
+    created: "2024-10-22T03:30:11.162076671Z"
     description: Deploy Matthew Ahrenstein's standard debugging container along with
       the debugging namespace
-    digest: 558e261fc9a5a3a63b6911c496f7499a4f53f48728f671242ef36a3bf5d03260
+    digest: 43818d0c63f43dd254d3ce5ab541e98f2f773b9c59fc8dba9166bafd8e20e725
     home: https://github.com/ahrenstein/docker-debugging
     keywords:
     - Debugging
@@ -211,7 +232,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.985712387Z"
+    created: "2024-10-22T03:30:11.16189418Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: 185ea05a44433dd346906cc05f2ed46707d0bf44631c8380ca8a0b8d810bfca3
@@ -228,7 +249,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.985519394Z"
+    created: "2024-10-22T03:30:11.16170113Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: d9b4c2c5467e25b55468ce8fc4d98557e5c8022b905af6cc5af764897b4f6ef1
@@ -245,7 +266,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2024-09-12T03:16:26.985347181Z"
+    created: "2024-10-22T03:30:11.161538416Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: 068c1191bd2c9e48fdd13d999d4140e7960f834ba4e5fc4fb34e0b0f8791b95c
@@ -260,4 +281,4 @@ entries:
     urls:
     - https://helm-charts.route1337.com/debugging-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-12T03:16:26.982874154Z"
+generated: "2024-10-22T03:30:11.15881998Z"
