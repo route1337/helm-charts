@@ -2,7 +2,7 @@ apiVersion: v2
 name: cloudflared
 description: Deploy a cloudflared tunnel from a Zero Trust console token
 type: application
-version: 0.2.1
+version: 0.2.2
 appVersion: "latest" # We always prefer running the latest tunnel
 keywords:
   - Zero Trust
