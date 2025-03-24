@@ -1,0 +1,41 @@
+namespace: rpcs
+
+diagnostic: false
+
+consensusClient:
+  name: lighthouse-beacon
+  image:
+    repository: sigp/lighthouse:latest
+    pullPolicy: Always
+  replicas: 1
+  resources:
+    limits:
+      memory: "24000Mi"
+    requests:
+      memory: "16000Mi"
+  volume:
+    capacity: 200Gi
+    storageClass: rpc-sc
+  keepWithRpcService: false
+
+rpcService:
+  name: geth-mainnet-full
+  goerli: false
+  image:
+    repository: ethereum/client-go:stable
+    pullPolicy: Always
+  replicas: 1
+  resources:
+    limits:
+      memory: "24000Mi"
+    requests:
+      memory: "16000Mi"
+  volume:
+    capacity: 2000Gi
+    storageClass: rpc-sc
+
+sharedEfsVolume: #TODO genericize to not just be EFS
+  name: "mainnet-jwtsecret"
+  filesystemId: ""
+  capacity: 1Gi
+  storageClass: "efs-sc"
