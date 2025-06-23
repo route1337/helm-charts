@@ -1,0 +1,55 @@
+timezone: "America/New_York"
+serviceName: "ipamsystem"
+nfs:
+  storageCapacity: 50Gi
+  accessMode: ReadWriteMany
+  nfsPath: "/path/to/mount"
+  nfsSubPath: "phpipam/dbdata"
+  nfsServer: 10.0.0.1
+
+ingress:
+  enabled: true
+  domain: phpipam.contoso.com
+  certManager: true
+  certIssuer: letsencrypt-prod
+  annotations: {}
+
+phpipam:
+  image:
+    repository: phpipam/phpipam-www
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  replicas: 1
+  spreadPods: true
+  port: 80
+  disableInstaller: true # Turn this on to install phpIPAM
+  dbUser: phpipam
+  dbName: phpipam
+  annotations: {}
+  ipamSecret:
+    manuallyCreatedSecret: ""
+    secretName: ipam
+    secretStore: 1password-prod
+    secretStoreKind: ClusterSecretStore
+
+cronService:
+  scanInterval: "1h"
+  image:
+    repository: "phpipam/phpipam-cron"
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+mariadb:
+  image:
+    repository: mariadb
+    pullPolicy: Always
+    tag: "10.6.14"
+  webhost: "%"
+  annotations: {}
+  dbSecret:
+    manuallyCreatedSecret: ""
+    secretName: ipam-database
+    secretStore: 1password-prod
+    secretStoreKind: ClusterSecretStore

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.serviceName }}-mariadb-nfs-pv
+  namespace: {{ .Release.Namespace }}
+  labels:
+    type: {{ .Values.serviceName }}-db
+spec:
+  storageClassName: ""
+  capacity:
+    storage: {{ .Values.nfs.storageCapacity | quote }}
+  accessModes:
+    - {{ .Values.nfs.accessMode }}
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: {{ .Values.nfs.nfsServer }}
+    path: {{ .Values.nfs.nfsPath | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.serviceName }}-mariadb-nfs-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  storageClassName: ""
+  selector:
+    matchLabels:
+      type: {{ .Values.serviceName }}-db
+  accessModes:
+    - {{ .Values.nfs.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.nfs.storageCapacity | quote }}

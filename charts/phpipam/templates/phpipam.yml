@@ -1,0 +1,141 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.serviceName }}-phpipam-web
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.serviceName }}-phpipam-web
+  replicas: {{ .Values.phpipam.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.serviceName }}-phpipam-web
+      annotations:
+        {{- if .Values.phpipam.annotations }}
+        {{- with .Values.phpipam.annotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
+    spec:
+{{- if .Values.phpipam.spreadPods }}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.serviceName }}-phpipam-web
+{{- end }}
+      containers:
+      - name: {{ .Values.serviceName }}-phpipam-web
+        image: "{{ .Values.phpipam.image.repository }}:{{ .Values.phpipam.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: Always
+        ports:
+          - name: http
+            containerPort: {{ .Values.phpipam.port }}
+            protocol: TCP
+        env:
+          - name: TZ
+            value: {{ .Values.timezone | quote }}
+          - name: IPAM_DATABASE_USER
+            value: {{ .Values.phpipam.dbUser | quote }}
+          - name: IPAM_DATABASE_NAME
+            value: {{ .Values.phpipam.dbName | quote }}
+          - name: IPAM_DATABASE_HOST
+            value: "{{ .Values.serviceName }}-mariadb.{{ .Release.Namespace }}.svc.cluster.local"
+          - name: IPAM_DATABASE_WEBHOST
+            value: {{ .Values.mariadb.webhost | quote }}
+          - name: IPAM_TRUST_X_FORWARDED
+            value: "true"
+          - name: IPAM_DISABLE_INSTALLER
+            value: {{ .Values.phpipam.disableInstaller | quote }}
+{{- if .Values.phpipam.ipamSecret.manuallyCreatedSecret }}
+          - name: IPAM_DATABASE_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.phpipam.ipamSecret.manuallyCreatedSecret }}
+                key: IPAM_DATABASE_PASS
+{{- else }}
+          - name: IPAM_DATABASE_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.serviceName }}-phpipam
+                key: IPAM_DATABASE_PASS
+{{- end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.serviceName }}-phpipam-cron
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.serviceName }}-phpipam-cron
+  replicas: {{ .Values.phpipam.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.serviceName }}-phpipam-cron
+      annotations:
+        {{- if .Values.phpipam.annotations }}
+        {{- with .Values.phpipam.annotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
+    spec:
+{{- if .Values.phpipam.spreadPods }}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.serviceName }}-phpipam-cron
+{{- end }}
+      containers:
+        - name: {{ .Values.serviceName }}-phpipam-cron
+          image: "{{ .Values.cronService.image.repository }}:{{ .Values.cronService.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: {{ .Values.timezone | quote }}
+            - name: IPAM_DATABASE_USER
+              value: {{ .Values.phpipam.dbUser | quote }}
+            - name: IPAM_DATABASE_NAME
+              value: {{ .Values.phpipam.dbName | quote }}
+            - name: IPAM_DATABASE_HOST
+              value: "{{ .Values.serviceName }}-mariadb.{{ .Release.Namespace }}.svc.cluster.local"
+            - name: IPAM_DATABASE_WEBHOST
+              value: {{ .Values.mariadb.webhost | quote }}
+            - name: SCAN_INTERVAL
+              value: {{ .Values.cronService.scanInterval | quote }}
+{{- if .Values.phpipam.ipamSecret.manuallyCreatedSecret }}
+            - name: IPAM_DATABASE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.phpipam.ipamSecret.manuallyCreatedSecret }}
+                  key: IPAM_DATABASE_PASS
+{{- else }}
+            - name: IPAM_DATABASE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.serviceName }}-phpipam
+                  key: IPAM_DATABASE_PASS
+{{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.serviceName }}-phpipam-web
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.serviceName }}-phpipam-web
+spec:
+  selector:
+    app: {{ .Values.serviceName }}-phpipam-web
+  ports:
+    - name: http
+      port: {{ .Values.phpipam.port }}
