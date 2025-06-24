@@ -64,6 +64,7 @@ spec:
                 name: {{ .Values.serviceName }}-phpipam
                 key: IPAM_DATABASE_PASS
 {{- end }}
+{{- if .Values.cronService.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -124,6 +125,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.serviceName }}-phpipam
                   key: IPAM_DATABASE_PASS
+{{- end }}
 {{- end }}
 ---
 apiVersion: v1
