@@ -1,4 +1,17 @@
 apiVersion: v2
 name: fastbound-downloader
+description: Deploy the Fastbound Downloader tool
+type: application
 version: 1.0.0
 appVersion: "0.2.0"
+keywords:
+  - ATF
+  - Compliance
+  - FFL
+  - Firearms
+  - Bound Books
+home: https://github.com/route1337/fastbound-downloader
+maintainers:
+  - name: Route 1337 LLC
+    url: https://www.route1337.com
+deprecated: false
