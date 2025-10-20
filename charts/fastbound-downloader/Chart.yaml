@@ -2,7 +2,7 @@ apiVersion: v2
 name: fastbound-downloader
 description: Deploy the Fastbound Downloader tool
 type: application
-version: 1.0.1
+version: 1.0.2
 appVersion: "0.2.0"
 keywords:
   - ATF

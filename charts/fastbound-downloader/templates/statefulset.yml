@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
           - name: metrics
-            containerPort: 9090
+            containerPort: {{ .Values.metricsPort }}
             protocol: TCP
         volumeMounts:
           - name: secret-config
