@@ -1,0 +1,56 @@
+{{- if .Values.cron }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}-fbdownloader-cron
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.name }}-fbdownloader
+spec:
+  schedule: {{ .Values.cron | quote }}
+  timeZone: {{ .Values.cronTimezone }}
+  concurrencyPolicy: Forbid # Duplicate downloads will only frustrate ATF
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: {{ .Values.name }}-fbdownloader
+    spec:
+      template:
+        metadata:
+          labels:
+            app: {{ .Values.name }}-fbdownloader
+          {{- if .Values.annotations }}
+          annotations:
+          {{- with .Values.annotations }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+        spec:
+          restartPolicy: OnFailure 
+          terminationGracePeriodSeconds: 10
+          containers:
+          - name: {{ .Values.name }}-fbdownloader
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            volumeMounts:
+              - name: secret-config
+                mountPath: /config/settings.json
+                subPath: settings.json
+                readOnly: true
+              - mountPath: "/books/"
+                name: {{ .Values.name }}-books
+                subPath: {{ .Values.nfs.nfsSubPath }}/books
+              - mountPath: "/4473s/"
+                name: {{ .Values.name }}-books
+                subPath: {{ .Values.nfs.nfsSubPath }}/4473s
+          volumes:
+            - name: secret-config
+              secret:
+                secretName: {{ .Values.name }}-fbdownloader-config
+                defaultMode: 0400
+            - name: {{ .Values.name }}-books
+              persistentVolumeClaim:
+                claimName: {{ .Values.name }}-books
+{{- end }}

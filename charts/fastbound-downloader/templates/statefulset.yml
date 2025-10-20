@@ -1,0 +1,54 @@
+{{- if not .Values.cron }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}-fbdownloader
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.name }}-fbdownloader
+spec:
+  serviceName: {{ .Values.name }}-fbdownloader-service
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}-fbdownloader
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}-fbdownloader
+      annotations:
+        prometheus.io/port: {{ .Values.metricsPort | quote }}
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        {{- if .Values.annotations }}
+        {{- with .Values.annotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: {{ .Values.name }}-fbdownloader
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        volumeMounts:
+          - name: secret-config
+            mountPath: /config/settings.json
+            subPath: settings.json
+            readOnly: true
+          - mountPath: "/books/"
+            name: {{ .Values.name }}-books
+            subPath: {{ .Values.nfs.nfsSubPath }}/books
+          - mountPath: "/4473s/"
+            name: {{ .Values.name }}-books
+            subPath: {{ .Values.nfs.nfsSubPath }}/4473s
+      volumes:
+        - name: secret-config
+          secret:
+            secretName: {{ .Values.name }}-fbdownloader-config
+            defaultMode: 0400
+        - name: {{ .Values.name }}-books
+          persistentVolumeClaim:
+            claimName: {{ .Values.name }}-books
+{{- end }}
