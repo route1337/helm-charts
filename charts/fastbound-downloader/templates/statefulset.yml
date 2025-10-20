@@ -32,6 +32,10 @@ spec:
       - name: {{ .Values.name }}-fbdownloader
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - name: metrics
+            containerPort: 9090
+            protocol: TCP
         volumeMounts:
           - name: secret-config
             mountPath: /config/settings.json
