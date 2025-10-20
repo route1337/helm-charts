@@ -1,0 +1,24 @@
+name: clientName
+
+configSecret:
+  secretName: fbdownloader-config
+  secretStore: 1password-prod
+  secretStoreKind: ClusterSecretStore
+
+nfs:
+  storageCapacity: 50Gi
+  accessMode: ReadWriteMany
+  nfsPath: "/path/to/mount"
+  nfsSubPath: "clientName"
+  nfsServer: 10.0.0.1
+
+# If cron is not empty a CronJob will be made instead of a StatefulSet.
+# Your is_cron value in the config really matters when making this choice.
+cron: ""
+cronTimezone: "America/New_York"
+
+image:
+  repository: ghcr.io/route1337/fastbound-downloader
+  pullPolicy: Always
+  # Overrides the image tag
+  tag: ""
