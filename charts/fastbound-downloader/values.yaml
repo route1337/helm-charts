@@ -22,3 +22,6 @@ image:
   pullPolicy: Always
   # Overrides the image tag
   tag: ""
+
+metricsPort: 9090
+annotations: {}

@@ -21,6 +21,12 @@ spec:
         metadata:
           labels:
             app: {{ .Values.name }}-fbdownloader
+          {{- if .Values.annotations }}
+          annotations:
+          {{- with .Values.annotations }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
         spec:
           restartPolicy: OnFailure 
           terminationGracePeriodSeconds: 10
