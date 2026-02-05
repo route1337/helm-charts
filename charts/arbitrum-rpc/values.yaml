@@ -1,0 +1,21 @@
+namespace: rpcs
+
+rpcService:
+  name: arbitrum-nitro
+  image:
+    repository: offchainlabs/nitro-node
+    pullPolicy: IfNotPresent
+  replicas: 1
+  resources:
+    limits:
+      memory: "24000Mi"
+    requests:
+      memory: "16000Mi"
+  volume:
+    capacity: 3000Gi
+    storageClass: rpc-sc
+  gethRpcUrl: http://geth-mainnet-full.rpcs.svc.cluster.local:8545
+  chainId: 42161
+  init:
+    url: https://snapshot.arbitrum.io/mainnet/nitro.tar
+    downloadPath: /home/user/.arbitrum/tmp

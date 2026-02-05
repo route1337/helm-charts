@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.consensusClient.name }}
+  namespace: {{ .Values.namespace}}
+spec:
+  serviceName: {{ .Values.consensusClient.name }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.consensusClient.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.consensusClient.name }}
+    spec:
+{{- if .Values.consensusClient.keepWithRpcService }}
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - {{ .Values.rpcService.name }}
+              topologyKey: "kubernetes.io/hostname"
+{{- end}}
+      containers:
+        - name: {{ .Values.consensusClient.name }}
+          image: {{ .Values.consensusClient.image.repository }}
+          imagePullPolicy: {{ .Values.consensusClient.image.pullPolicy }}
+          command:
+            - sh
+            - -ac
+            - >
+              exec lighthouse
+              beacon_node
+{{- if .Values.rpcService.goerli }}
+              --network goerli
+{{- end }}
+              --disable-upnp
+              --disable-enr-auto-update
+              --listen-address=0.0.0.0
+              --port=9000
+              --discovery-port=9000
+              --http
+              --http-address=0.0.0.0
+              --http-port=5052
+              --execution-endpoint=http://{{ .Values.rpcService.name }}.{{ .Values.namespace }}.svc.cluster.local:8551
+              --execution-jwt="/geth/.ethereum/geth/jwtsecret"
+{{- if .Values.rpcService.goerli }}
+              --checkpoint-sync-url=https://goerli.beaconstate.info/
+{{- else }}
+              --checkpoint-sync-url=https://beaconstate.info/
+{{- end }}
+          ports:
+            - containerPort: 9000
+              name: p2p-tcp
+              protocol: TCP
+            - containerPort: 9000
+              name: p2p-udp
+              protocol: UDP
+            - containerPort: 5052
+              name: http-api
+          volumeMounts:
+            - name: beacon-data
+              mountPath: /root
+            - name:  {{ .Values.sharedEfsVolume.name }}
+              mountPath: /geth/
+              readOnly: true
+{{/*          livenessProbe:*/}}
+{{/*            tcpSocket:*/}}
+{{/*              port: http-api*/}}
+{{/*            initialDelaySeconds: 60*/}}
+{{/*            periodSeconds: 120*/}}
+{{/*          readinessProbe:*/}}
+{{/*            tcpSocket:*/}}
+{{/*              port: http-api*/}}
+{{/*            initialDelaySeconds: 10*/}}
+{{/*            periodSeconds: 10*/}}
+          resources:
+            limits:
+              memory: {{ .Values.consensusClient.resources.limits.memory | quote }}
+            requests:
+              memory: {{ .Values.consensusClient.resources.requests.memory | quote }}
+      volumes:
+        - name: {{ .Values.sharedEfsVolume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.sharedEfsVolume.name }}
+  volumeClaimTemplates:
+    - metadata:
+        name: beacon-data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        storageClassName: {{ .Values.consensusClient.volume.storageClass }}
+        resources:
+          requests:
+            storage: {{ .Values.consensusClient.volume.capacity }}
