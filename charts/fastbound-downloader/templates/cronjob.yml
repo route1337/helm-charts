@@ -42,9 +42,6 @@ spec:
               - mountPath: "/books/"
                 name: {{ .Values.name }}-books
                 subPath: {{ .Values.nfs.nfsSubPath }}/books
-              - mountPath: "/4473s/"
-                name: {{ .Values.name }}-books
-                subPath: {{ .Values.nfs.nfsSubPath }}/4473s
           volumes:
             - name: secret-config
               secret:
