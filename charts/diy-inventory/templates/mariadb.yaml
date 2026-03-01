@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.config.serviceName }}-db
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.config.serviceName }}-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.config.serviceName }}-db
+        annotations:
+          {{- if .Values.config.database.annotations }}
+          {{- with .Values.config.database.annotations }}
+          {{- toYaml . | nindent 8 }}
+          {{- end }}
+          {{- end }}
+    spec:
+      securityContext:
+        fsGroup: {{ .Values.config.database.fsGroup }}
+        runAsUser: {{ .Values.config.database.runAsUser }}
+        runAsGroup: {{ .Values.config.database.runAsGroup }}
+      containers:
+      - name: {{ .Values.config.serviceName }}-db
+        image: "{{ .Values.images.mariadb.repository }}:{{ .Values.images.mariadb.tag }}"
+        imagePullPolicy: {{ .Values.images.mariadb.pullPolicy }}
+        ports:
+          - name: mysql
+            containerPort: 3306
+            protocol: TCP
+        env:
+          - name: MYSQL_DATABASE
+            value: "nocodb"
+{{- if .Values.config.secret.manuallyCreatedSecret}}
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.secret.manuallyCreatedSecret }}
+                key: MYSQL_ROOT_PASSWORD
+  {{- else }}
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.secret.secretName }}
+                key: MYSQL_ROOT_PASSWORD
+  {{- end }}
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: "{{ .Values.config.serviceName }}-db"
+            subPath: {{ .Values.config.database.dataPath }}
+        resources: {}
+      volumes:
+        - name: "{{ .Values.config.serviceName }}-db"
+          persistentVolumeClaim:
+            claimName: {{ .Values.config.serviceName }}-nfs-pvc

@@ -1,0 +1,41 @@
+config:
+  serviceName: inventory
+  enableNetworkPolicy: true
+  database:
+    fsGroup: 999
+    runAsUser: 999
+    runAsGroup: 999
+    dataPath: "dbdata"
+    annotations: {}
+  ui:
+    dataPath: "nocodb"
+    annotations: {}
+  secret:
+    manuallyCreatedSecret: ""
+    secretName: diy-inventory
+    secretStore: 1password-prod
+    secretStoreKind: ClusterSecretStore
+
+ingress:
+  enabled: true
+  domain: gundb.contoso.com
+  certManager: true
+  certIssuer: letsencrypt-prod
+  annotations: {}
+
+nfs:
+  storageCapacity: 10Gi
+  accessMode: ReadWriteMany
+  nfsPath: "/volume1/InventoryDB"
+  nfsServer: 10.0.0.1
+
+images:
+  nocodb:
+    repository: nocodb/nocodb
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  mariadb:
+    repository: mariadb
+    pullPolicy: IfNotPresent
+    tag: "10.11"
