@@ -13,3 +13,4 @@ ingress:
   enabled: false
   domain: debugging.contoso.com
   certManager: true
+  certIssuer: letsencrypt-prod
