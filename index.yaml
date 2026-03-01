@@ -3,9 +3,9 @@ entries:
   cloudflare-mnet:
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.163323812Z"
+    created: "2026-03-01T19:53:10.735781882Z"
     description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
-    digest: 55760799f5d2e7621b49ebd35e4ccad9b7ff1abe4e6e3d1e7bddc0bc412b3907
+    digest: c6b6fd886c333b11d758b3a95101ce921df8b642ae47d9045e41bc7409b34abd
     home: https://github.com/route1337/docker-cf-mnet-server
     keywords:
     - Zero Trust
@@ -24,7 +24,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.163068657Z"
+    created: "2026-03-01T19:53:10.735552636Z"
     description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
     digest: d6b5a632db84b42f9a89b33af715e2ffa5c199b9e4df2abc7cd8a3f95a901fd9
     home: https://github.com/route1337/docker-cf-mnet-server
@@ -45,7 +45,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.162333118Z"
+    created: "2026-03-01T19:53:10.735326949Z"
     description: Deploy Route 1337's custom Cloudflare Managed Network Webserver
     digest: b4a6f0375d134d5e80a0e9768461dff22a22c044c88dd8d9f7f89ab949ea4502
     home: https://github.com/route1337/docker-cf-mnet-server
@@ -67,9 +67,9 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.165912612Z"
+    created: "2026-03-01T19:53:10.739461823Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
-    digest: a492b049ef49a117ac67867735ebd203a5179a83abfeb852d0a3aa05a24f4c17
+    digest: 6257dbf3a90515fb3ed827ef8e2c1832ec404f783f0b74d5c0dc35e2f7c587ef
     home: https://github.com/cloudflare/cloudflared
     keywords:
     - Zero Trust
@@ -88,7 +88,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.165650865Z"
+    created: "2026-03-01T19:53:10.739229487Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 96b22748d823959a5778c2c77a5b779656f3cac74593d517227960f4ae6aa08b
     home: https://github.com/cloudflare/cloudflared
@@ -109,7 +109,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.165394347Z"
+    created: "2026-03-01T19:53:10.739006269Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 368424b45aab539bfab2856e1fac453b4344e265a47e85d823140c00b597839e
     home: https://github.com/cloudflare/cloudflared
@@ -130,7 +130,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.165172905Z"
+    created: "2026-03-01T19:53:10.738806543Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: c99b968f0bee44993479d8e96f475faba2545f9592d5be77948f7cbf64bde353
     home: https://github.com/cloudflare/cloudflared
@@ -151,7 +151,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.164936314Z"
+    created: "2026-03-01T19:53:10.738552189Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: c18dfe7cc27ab07637bc68882f097d614c84166d8ce9f57f41195385601c8bac
     home: https://github.com/cloudflare/cloudflared
@@ -172,7 +172,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.164653287Z"
+    created: "2026-03-01T19:53:10.738319554Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 51f72a988ba6432aed12d5063f4c7c6d291a70fea8a573e0334c62c68705d3bd
     home: https://github.com/cloudflare/cloudflared
@@ -193,7 +193,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.164429902Z"
+    created: "2026-03-01T19:53:10.737939607Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 9406d888b29dea479e6200dc45c5046f8169d19e55ce8287c430a0c63569558c
     home: https://github.com/cloudflare/cloudflared
@@ -214,7 +214,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.164147215Z"
+    created: "2026-03-01T19:53:10.737146304Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: fcb0683a38789965b209d7d57b82e4b41edb61c0bfd320b5e40d5fde1b6d1b5f
     home: https://github.com/cloudflare/cloudflared
@@ -235,7 +235,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.163905695Z"
+    created: "2026-03-01T19:53:10.7364887Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: 067091d9d4cd508580c28354cd0cc92a205f27849dc369b5ade06911c419797f
     home: https://github.com/cloudflare/cloudflared
@@ -256,7 +256,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.1635805Z"
+    created: "2026-03-01T19:53:10.736016784Z"
     description: Deploy a cloudflared tunnel from a Zero Trust console token
     digest: a2701a36781a55611b672812a133fb5e3926e9ece2a0973cb477e4760a017a12
     home: https://github.com/cloudflare/cloudflared
@@ -278,7 +278,24 @@ entries:
   debugging:
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.166597818Z"
+    created: "2026-03-01T19:53:10.740255333Z"
+    description: Deploy Matthew Ahrenstein's standard debugging container along with
+      the debugging namespace
+    digest: b99c911cc5fa953223afb74b10be93fedbb39c70a13c553838e93381aa1acb30
+    home: https://github.com/ahrenstein/docker-debugging
+    keywords:
+    - Debugging
+    maintainers:
+    - name: Route 1337 LLC
+      url: https://www.route1337.com
+    name: debugging
+    type: application
+    urls:
+    - https://helm-charts.route1337.com/debugging-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: latest
+    created: "2026-03-01T19:53:10.740101449Z"
     description: Deploy Matthew Ahrenstein's standard debugging container along with
       the debugging namespace
     digest: 649970c6e02aacb329ecdf019ea5ecb2326e8e97bc502c8a1f7f69ac0bc9d932
@@ -295,7 +312,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.166424826Z"
+    created: "2026-03-01T19:53:10.739938955Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: 185ea05a44433dd346906cc05f2ed46707d0bf44631c8380ca8a0b8d810bfca3
@@ -312,7 +329,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.166243999Z"
+    created: "2026-03-01T19:53:10.739773026Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: d9b4c2c5467e25b55468ce8fc4d98557e5c8022b905af6cc5af764897b4f6ef1
@@ -329,7 +346,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: latest
-    created: "2026-02-10T18:01:55.166084873Z"
+    created: "2026-03-01T19:53:10.739620125Z"
     description: Deploy the Matthew Ahrenstein's standard debugging container along
       with the debugging namespace
     digest: 068c1191bd2c9e48fdd13d999d4140e7960f834ba4e5fc4fb34e0b0f8791b95c
@@ -347,9 +364,9 @@ entries:
   fastbound-downloader:
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2026-02-10T18:01:55.168239084Z"
+    created: "2026-03-01T19:53:10.741287897Z"
     description: Deploy the Fastbound Downloader tool
-    digest: 91eb82a50e2d498649c51a4229e56ec9ab6861628b93592247458a74cd0a236b
+    digest: 98eb104b1b7ff1c92e608200355c984e82e1792c695a4814c833a5902f40748a
     home: https://github.com/route1337/fastbound-downloader
     keywords:
     - ATF
@@ -367,7 +384,7 @@ entries:
     version: 1.0.4
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2026-02-10T18:01:55.167723073Z"
+    created: "2026-03-01T19:53:10.741095Z"
     description: Deploy the Fastbound Downloader tool
     digest: cdad11454d4e9e04fb89c7566b94b4bec2397731e4ddf8488001742adf1d93ee
     home: https://github.com/route1337/fastbound-downloader
@@ -387,7 +404,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2026-02-10T18:01:55.16731843Z"
+    created: "2026-03-01T19:53:10.740878503Z"
     description: Deploy the Fastbound Downloader tool
     digest: 23cc4c8e4ff711b55b1ce1fc29a6ffc68b7a414b7ff2bca158580327213bc6f5
     home: https://github.com/route1337/fastbound-downloader
@@ -407,7 +424,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2026-02-10T18:01:55.167078112Z"
+    created: "2026-03-01T19:53:10.740683553Z"
     description: Deploy the Fastbound Downloader tool
     digest: 8c7912bddebb06c3ae0e8b9787979ecf65a78fbaed9deb85f56967542fa51f2f
     home: https://github.com/route1337/fastbound-downloader
@@ -427,7 +444,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2026-02-10T18:01:55.166859495Z"
+    created: "2026-03-01T19:53:10.740465973Z"
     description: Deploy the Fastbound Downloader tool
     digest: 0012351ef186e72b91bfd302779afaa48639980d2566159c55f2f444ecc7e195
     home: https://github.com/route1337/fastbound-downloader
@@ -448,9 +465,9 @@ entries:
   phpipam:
   - apiVersion: v2
     appVersion: v1.6.0
-    created: "2026-02-10T18:01:55.169527773Z"
+    created: "2026-03-01T19:53:10.742351292Z"
     description: Deploy phpIPAM with MariaDB
-    digest: a71375cd53c668229f0b0e4cadf1526ffc32f8f89bfb392d88748bcc18b141a6
+    digest: 8ae24ccac1e7fdd4c1b85bd6810776e015f3aaceb5e86d6cc611a088edad85a7
     home: https://phpipam.net/
     keywords:
     - Network
@@ -466,7 +483,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v1.6.0
-    created: "2026-02-10T18:01:55.169192189Z"
+    created: "2026-03-01T19:53:10.741840347Z"
     description: Deploy phpIPAM with MariaDB
     digest: 6fd76007f61347b1002f23258986d6dfaa35795e048e21d71e0a66fef523e945
     home: https://phpipam.net/
@@ -484,7 +501,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: v1.6.0
-    created: "2026-02-10T18:01:55.168875379Z"
+    created: "2026-03-01T19:53:10.741554452Z"
     description: Deploy phpIPAM with MariaDB
     digest: fd3c04dacf55e315ab2ad2fa1faed0619cfe497ab55de41b717f8ece3151654f
     home: https://phpipam.net/
@@ -500,4 +517,4 @@ entries:
     urls:
     - https://helm-charts.route1337.com/phpipam-0.1.0.tgz
     version: 0.1.0
-generated: "2026-02-10T18:01:55.161454662Z"
+generated: "2026-03-01T19:53:10.734955187Z"
