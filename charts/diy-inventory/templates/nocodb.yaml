@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.config.serviceName }}-ui
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.config.serviceName }}-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.config.serviceName }}-ui
+        annotations:
+          {{- if .Values.config.ui.annotations }}
+          {{- with .Values.config.ui.annotations }}
+          {{- toYaml . | nindent 8 }}
+          {{- end }}
+          {{- end }}
+    spec:
+      containers:
+      - name: {{ .Values.config.serviceName }}-ui
+        image: "{{ .Values.images.nocodb.repository }}:{{ .Values.images.nocodb.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.images.nocodb.pullPolicy }}
+        ports:
+          - containerPort: 8080
+        env:
+          - name: NC_DISABLE_TELE
+            value: "true"
+          - name: NC_DISABLE_SUPPORT_CHAT
+            value: "true"
+{{- if .Values.config.secret.manuallyCreatedSecret}}
+          - name: NC_DB
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.secret.manuallyCreatedSecret }}
+                key: NC_DB
+          - name: NC_AUTH_JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.secret.manuallyCreatedSecret }}
+                key: NC_AUTH_JWT_SECRET
+  {{- else }}
+          - name: NC_DB
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.secret.secretName }}
+                key: NC_DB
+          - name: NC_AUTH_JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.secret.secretName }}
+                key: NC_AUTH_JWT_SECRET
+  {{- end }}
+        volumeMounts:
+          - mountPath: "/usr/app/data"
+            name: "{{ .Values.config.serviceName }}-ui"
+            subPath: {{ .Values.config.ui.dataPath }}
+        resources: {}
+      volumes:
+        - name: "{{ .Values.config.serviceName }}-ui"
+          persistentVolumeClaim:
+            claimName: {{ .Values.config.serviceName }}-nfs-pvc

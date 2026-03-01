@@ -1,0 +1,16 @@
+apiVersion: v2
+name: diy-inventory
+description: Deploy a simple Postgres server and NocoDB server for a dead simple DIY inventory system
+type: application
+version: 0.1.0
+appVersion: "0.301.3"
+keywords:
+  - Inventory
+  - DIY
+  - Do-It-Yourself
+  - Database
+  - Simple
+maintainers:
+  - name: Route 1337 LLC
+    url: https://www.route1337.com
+deprecated: false
