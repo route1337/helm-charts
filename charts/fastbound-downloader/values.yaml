@@ -18,7 +18,7 @@ cron: ""
 cronTimezone: "America/New_York"
 
 image:
-  repository: ghcr.io/route1337/fastbound-downloader
+  repository: ghcr.io/scienceguns/fastbound-downloader
   pullPolicy: Always
   # Overrides the image tag
   tag: ""
