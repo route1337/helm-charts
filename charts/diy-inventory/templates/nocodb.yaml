@@ -4,6 +4,10 @@ kind: Deployment
 metadata:
   name: {{ .Values.config.serviceName }}-ui
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.config.ui.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   selector:
     matchLabels:
@@ -13,12 +17,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.config.serviceName }}-ui
-        annotations:
-          {{- if .Values.config.ui.annotations }}
-          {{- with .Values.config.ui.annotations }}
-          {{- toYaml . | nindent 8 }}
-          {{- end }}
-          {{- end }}
+      {{- with .Values.config.ui.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       containers:
       - name: {{ .Values.config.serviceName }}-ui

@@ -5,7 +5,8 @@ ingress:
   replicas: 3
   metricsPort: 2000
   spreadPods: true
-  annotations: {}
+  deploymentAnnotations: {}
+  podAnnotations: {}
   consoleTokenSecret:
     manuallyCreatedSecret: ""
     secretName: 1337-k8s-cloudflare-ingress
@@ -17,7 +18,8 @@ warp:
   replicas: 3
   metricsPort: 2000
   spreadPods: true
-  annotations: {}
+  deploymentAnnotations: {}
+  podAnnotations: {}
   consoleTokenSecret:
     manuallyCreatedSecret: ""
     secretName: 1337-k8s-cloudflare-warp

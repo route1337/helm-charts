@@ -4,6 +4,10 @@ kind: Deployment
 metadata:
   name: {{ .Values.config.serviceName }}-db
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.config.database.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   selector:
     matchLabels:
@@ -13,12 +17,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.config.serviceName }}-db
-        annotations:
-          {{- if .Values.config.database.annotations }}
-          {{- with .Values.config.database.annotations }}
-          {{- toYaml . | nindent 8 }}
-          {{- end }}
-          {{- end }}
+      {{- with .Values.config.database.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       securityContext:
         fsGroup: {{ .Values.config.database.fsGroup }}

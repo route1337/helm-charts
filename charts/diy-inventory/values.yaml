@@ -6,10 +6,12 @@ config:
     runAsUser: 999
     runAsGroup: 999
     dataPath: "dbdata"
-    annotations: {}
+    deploymentAnnotations: {}
+    podAnnotations: {}
   ui:
     dataPath: "nocodb"
-    annotations: {}
+    deploymentAnnotations: {}
+    podAnnotations: {}
   secret:
     manuallyCreatedSecret: ""
     secretName: diy-inventory

@@ -6,6 +6,10 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.name }}-fbdownloader
+  {{- with .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   schedule: {{ .Values.cron | quote }}
   timeZone: {{ .Values.cronTimezone }}
@@ -21,11 +25,9 @@ spec:
         metadata:
           labels:
             app: {{ .Values.name }}-fbdownloader
-          {{- if .Values.annotations }}
+          {{- with .Values.podAnnotations }}
           annotations:
-          {{- with .Values.annotations }}
-          {{- toYaml . | nindent 12 }}
-          {{- end }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
         spec:
           restartPolicy: OnFailure 

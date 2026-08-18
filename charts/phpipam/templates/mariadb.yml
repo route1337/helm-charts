@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: {{ .Values.serviceName }}-mariadb
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.mariadb.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   selector:
     matchLabels:
@@ -12,12 +16,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.serviceName }}-mariadb
+      {{- with .Values.mariadb.podAnnotations }}
       annotations:
-        {{- if .Values.mariadb.annotations }}
-        {{- with .Values.mariadb.annotations }}
         {{- toYaml . | nindent 8 }}
-        {{- end }}
-        {{- end }}
+      {{- end }}
     spec:
       securityContext:
         fsGroup: 999
