@@ -1,0 +1,17 @@
+apiVersion: v2
+name: arbitrum-rpc
+description: Deploy an Arbitrum RPC server using Nitro
+type: application
+version: 0.1.0
+appVersion: "2.1.1-e9d8842"
+keywords:
+  - cryptocurrency
+  - Arbitrum
+  - Nitro
+  - geth
+  - RPCs
+home: https://arbitrum.io/
+maintainers:
+  - name: Route 1337 LLC
+    url: https://www.route1337.com
+deprecated: false

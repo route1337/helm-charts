@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.rpcService.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  serviceName: {{ .Values.rpcService.name }}
+  replicas: {{ .Values.rpcService.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.rpcService.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.rpcService.name }}
+    spec:
+      containers:
+        - name: {{ .Values.rpcService.name }}
+          image: "{{ .Values.rpcService.image.repository }}"
+          imagePullPolicy: {{ .Values.rpcService.image.pullPolicy }}
+          command:
+            - sh
+            - -ac
+            - >
+              exec geth
+{{- if .Values.rpcService.goerli }}
+              --goerli
+{{- end }}
+              --syncmode=snap
+              --http
+              --http.api=txpool,eth,net,web3,personal
+              --http.addr=0.0.0.0
+              --http.port=8545
+              --http.corsdomain=*
+              --http.vhosts=*
+              --ws
+              --ws.api=txpool,eth,net,web3,personal
+              --ws.addr=0.0.0.0
+              --ws.port=8546
+              --ws.origins=*
+              --authrpc.addr=0.0.0.0
+              --authrpc.port=8551
+              --authrpc.vhosts=*
+              --authrpc.jwtsecret /root/.ethereum/geth/jwtsecret
+              --datadir=/data
+              --db.engine=pebble
+          ports:
+            - name: http-rpc
+              containerPort: 8545
+              protocol: TCP
+            - name: ws-rpc
+              containerPort: 8546
+              protocol: TCP
+            - name: auth-rpc
+              containerPort: 8551
+              protocol: TCP
+            - name: p2p-tcp
+              containerPort: 30303
+              protocol: TCP
+            - name: p2p-udp
+              containerPort: 30303
+              protocol: UDP
+{{/*          livenessProbe:*/}}
+{{/*            tcpSocket:*/}}
+{{/*              port: http-rpc*/}}
+{{/*            initialDelaySeconds: 60*/}}
+{{/*            periodSeconds: 120*/}}
+{{/*          readinessProbe:*/}}
+{{/*            tcpSocket:*/}}
+{{/*              port: http-rpc*/}}
+{{/*            initialDelaySeconds: 10*/}}
+{{/*            periodSeconds: 10*/}}
+          volumeMounts:
+            - name: rpc-data
+              mountPath: "/data"
+            - name:  {{ .Values.sharedEfsVolume.name }}
+              mountPath: /root
+          resources:
+            limits:
+              memory: {{ .Values.rpcService.resources.limits.memory | quote }}
+            requests:
+              memory: {{ .Values.rpcService.resources.requests.memory | quote }}
+      volumes:
+        - name: {{ .Values.sharedEfsVolume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.sharedEfsVolume.name }}
+  volumeClaimTemplates:
+    - metadata:
+        name: rpc-data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        storageClassName: {{ .Values.rpcService.volume.storageClass }}
+        resources:
+          requests:
+            storage: {{ .Values.rpcService.volume.capacity }}
